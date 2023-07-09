@@ -9,6 +9,7 @@
 5. 禁用截屏
 6. 禁用相机
 7. 禁用ADB调试
+8. 设置全局代理 [使用教程*有气无力版](https://github.com/ItosEO/DPM_Operate/blob/main/GlobalProxy_help.mp4)
 
 本软件是我第一次用UserService,写的不好见谅
 我UI设计比较垃圾,大家可以提PR
