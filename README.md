@@ -19,3 +19,5 @@
 [我的酷安](http://www.coolapk.com/u/3287595)
 
 求一波关注(doge)
+
+软件下载地址: [点我](https://itos.codegang.top/share/)
