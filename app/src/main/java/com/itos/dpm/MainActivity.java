@@ -10,7 +10,6 @@ import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -25,7 +24,6 @@ import android.widget.Toast;
 import com.rosan.dhizuku.api.Dhizuku;
 import com.rosan.dhizuku.api.DhizukuRequestPermissionListener;
 import com.rosan.dhizuku.api.DhizukuUserServiceArgs;
-import com.rosan.dhizuku.shared.DhizukuVariables;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -60,10 +58,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         getWindow().setStatusBarColor(getResources().getColor(R.color.white));
 
         setContentView(R.layout.activity_main);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         if (!Dhizuku.init(this)) {
             ShowToastL(this, "Dhizuku 初始化失败,请安装或启动 Dhizuku 应用程序,然后重新启动本APP。");
@@ -148,8 +144,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         try {
             PackageManager packageManager = getPackageManager();
             ApplicationInfo applicationInfo = packageManager.getApplicationInfo(pakeage, 0);
-            String appName = packageManager.getApplicationLabel(applicationInfo).toString();
-            return appName;
+            return packageManager.getApplicationLabel(applicationInfo).toString();
             // 在这里使用appName变量，即应用程序的名称
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
