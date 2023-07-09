@@ -75,18 +75,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
-        dhizuku.setActivity(this);
+
         if (!Dhizuku.init(this)) {
-//            ShowToastL(this, "Dhizuku 初始化失败,请安装或启动 Dhizuku 应用程序,然后重新启动本APP。");
-//            finish();
-//            return;
-            dhizuku.showDialog("Dhizuku 初始化失败,请安装或启动 Dhizuku 应用程序,然后重新启动本APP。");
+            ShowToastL(this, "Dhizuku 初始化失败,请安装或启动 Dhizuku 应用程序,然后重启本APP。");
+            ShowToastS(this, "密码9g7p");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://iamr0s.lanzoul.com/b02ki3edg"));
+            startActivity(intent);
+            finish();
+            return;
         }
         if (Dhizuku.getVersionCode() < 5) {
-//            ShowToastL(this, "请更新您的 Dhizuku 版本(需要2.8及以上)");
-//            finish();
-//            return;
-            dhizuku.showDialog("请更新您的 Dhizuku 版本(需要2.8及以上)");
+            ShowToastL(this, "请更新您的 Dhizuku 版本(需要2.8及以上)");
+            ShowToastS(this, "密码9g7p");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://iamr0s.lanzoul.com/b02ki3edg"));
+            startActivity(intent);
+            finish();
+            return;
         }
         if (!Dhizuku.isPermissionGranted()) {
             Dhizuku.requestPermission(new DhizukuRequestPermissionListener() {
