@@ -18,7 +18,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.rosan.dhizuku.api.Dhizuku;
@@ -34,13 +37,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
     DevicePolicyManager mDevicePolicyManager;
     private IUserService service;
     ComponentName componentName;
-    EditText pkg_editText, screen_editText;
     private static final String[] REQUIRED_DELEGATED_SCOPES = new String[]{
             DevicePolicyManager.DELEGATION_BLOCK_UNINSTALL,
             DevicePolicyManager.DELEGATION_PACKAGE_ACCESS,
-
-
     };
+
+    EditText pkg_editText, screen_editText;
+
+    String[] options = {"安装APP", "卸载APP", "ADB调试"};
+    Spinner spinner;
+    String UserRestriction;
+    String selectedItem;
+
     private boolean isDeviceOwner(){
         boolean isDeviceOwnerApp = mDevicePolicyManager.isDeviceOwnerApp(componentName.getPackageName());
         Log.d("TAG", "isDeviceOwnerApp: " + isDeviceOwnerApp);
@@ -99,12 +107,35 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.screen_capture_enabled).setOnClickListener(this);
         findViewById(R.id.camera_disabled).setOnClickListener(this);
         findViewById(R.id.camera_enabled).setOnClickListener(this);
-        findViewById(R.id.install_disabled).setOnClickListener(this);
-        findViewById(R.id.install_enabled).setOnClickListener(this);
-        findViewById(R.id.uninstall_disabled).setOnClickListener(this);
-        findViewById(R.id.uninstall_enabled).setOnClickListener(this);
+        findViewById(R.id.user_restriction_disabled).setOnClickListener(this);
+        findViewById(R.id.user_restriction_enabled).setOnClickListener(this);
         findViewById(R.id.set_org_name).setOnClickListener(this);
         findViewById(R.id.join).setOnClickListener(this);
+
+        spinner = findViewById(R.id.spinner);
+        // 创建适配器
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, options);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // 设置适配器
+        spinner.setAdapter(adapter);
+        // 设置选择项监听
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedItem = parent.getItemAtPosition(position).toString();
+                if (selectedItem.equals(options[0])){
+                    UserRestriction=UserManager.DISALLOW_INSTALL_APPS;
+                } else if (selectedItem.equals(options[1])) {
+                    UserRestriction=UserManager.DISALLOW_UNINSTALL_APPS;
+                } else {
+                    UserRestriction=UserManager.DISALLOW_DEBUGGING_FEATURES;
+                }
+                Toast.makeText(MainActivity.this, "选择了：" + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+
+        });
     }
 
     void bindUserService() {
@@ -179,21 +210,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
         String packageName = pkg_editText.getText().toString();
         String screen_text = screen_editText.getText().toString();
         if (id == R.id.block_uninstall) {
-            if (pkg2name(packageName)!="") {
+            if (!pkg2name(packageName).equals("")) {
                 mDevicePolicyManager.setUninstallBlocked(componentName, packageName, true);
                 ShowToastS(this, "已尝试限制 " + pkg2name(packageName) + " 卸载");
             } else {
                 ShowToastS(this, "未安装此软件");
             }
         } else if (id == R.id.unblock_uninstall) {
-            if (pkg2name(packageName)!="") {
+            if (!pkg2name(packageName).equals("")) {
                 mDevicePolicyManager.setUninstallBlocked(componentName, packageName, false);
                 ShowToastS(this, "已尝试解除限制 " + pkg2name(packageName) + " 卸载");
             } else {
                 ShowToastS(this, "未安装此软件");
             }
         } else if (id == R.id.check_unblock_uninstall) {
-            if (pkg2name(packageName)!="") {
+            if (!pkg2name(packageName).equals("")) {
                 boolean pkg_block_status = mDevicePolicyManager.isUninstallBlocked(componentName, packageName);
                 if (pkg_block_status){
                     ShowToastS(this, pkg2name(packageName)+" 无法被卸载");
@@ -238,33 +269,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
             } catch (RemoteException e) {
                 ShowToastS(this, "启用相机失败");
             }
-        } else if (id == R.id.install_disabled){
+        } else if (id == R.id.user_restriction_enabled){
             try {
-                service.add_user_restriction(UserManager.DISALLOW_INSTALL_APPS);
-                ShowToastS(this, "已尝试禁用安装APP");
+                service.add_user_restriction(UserRestriction);
+                ShowToastS(this, "已尝试禁用"+selectedItem);
             } catch (RemoteException e) {
-                ShowToastS(this, "禁用失败");
+                ShowToastS(this, "禁用"+selectedItem+"失败");
             }
-        } else if (id == R.id.install_enabled){
+        } else if (id == R.id.user_restriction_disabled){
             try {
-                service.clear_user_restriction(UserManager.DISALLOW_INSTALL_APPS);
-                ShowToastS(this, "已尝试启用安装APP");
+                service.clear_user_restriction(UserRestriction);
+                ShowToastS(this, "已尝试启用"+selectedItem);
             } catch (RemoteException e) {
-                ShowToastS(this, "启用失败");
-            }
-        }else if (id == R.id.uninstall_disabled){
-            try {
-                service.add_user_restriction(UserManager.DISALLOW_UNINSTALL_APPS);
-                ShowToastS(this, "已尝试禁用卸载APP");
-            } catch (RemoteException e) {
-                ShowToastS(this, "禁用失败");
-            }
-        } else if (id == R.id.uninstall_enabled){
-            try {
-                service.clear_user_restriction(UserManager.DISALLOW_UNINSTALL_APPS);
-                ShowToastS(this, "已尝试启用卸载APP");
-            } catch (RemoteException e) {
-                ShowToastS(this, "启用失败");
+                ShowToastS(this, "启用"+selectedItem+"失败");
             }
         } else if (id == R.id.set_org_name){
             try {

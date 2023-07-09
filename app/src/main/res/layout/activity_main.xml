@@ -151,49 +151,38 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/uninstall_enabled"
+            android:id="@+id/user_restriction_enabled"
             style="@android:style/Widget.Material.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="启用卸载"
+            android:textColor="@android:color/holo_blue_light"
+            android:text="启用限制"
             android:textSize="18sp" />
         <Button
-            android:id="@+id/uninstall_disabled"
+            android:id="@+id/user_restriction_disabled"
             style="@android:style/Widget.Material.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="禁用卸载"
-            android:textSize="18sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/install_enabled"
-            style="@android:style/Widget.Material.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="启用安装"
-            android:textSize="18sp" />
-        <Button
-            android:id="@+id/install_disabled"
-            style="@android:style/Widget.Material.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="禁用安装"
+            android:textColor="@android:color/holo_blue_light"
+            android:text="禁用限制"
             android:textSize="18sp" />
     </LinearLayout>
     <Space
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="29dp" />
 
     <Button
         android:id="@+id/join"
@@ -204,10 +193,5 @@
         android:text="加入QQ群"
         android:textColor="@android:color/holo_red_light"
         android:textSize="19sp" />
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        />
+
 </LinearLayout>
