@@ -2,9 +2,11 @@ package com.itos.dpm;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
@@ -33,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import com.itos.dpm.dhizuku;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     DevicePolicyManager mDevicePolicyManager;
@@ -72,15 +75,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
+        dhizuku.setActivity(this);
         if (!Dhizuku.init(this)) {
-            ShowToastL(this, "Dhizuku 初始化失败,请安装或启动 Dhizuku 应用程序,然后重新启动本APP。");
-            finish();
-            return;
+//            ShowToastL(this, "Dhizuku 初始化失败,请安装或启动 Dhizuku 应用程序,然后重新启动本APP。");
+//            finish();
+//            return;
+            dhizuku.showDialog("Dhizuku 初始化失败,请安装或启动 Dhizuku 应用程序,然后重新启动本APP。");
         }
         if (Dhizuku.getVersionCode() < 5) {
-            ShowToastL(this, "请更新您的 Dhizuku 版本(需要2.8及以上)");
-            finish();
-            return;
+//            ShowToastL(this, "请更新您的 Dhizuku 版本(需要2.8及以上)");
+//            finish();
+//            return;
+            dhizuku.showDialog("请更新您的 Dhizuku 版本(需要2.8及以上)");
         }
         if (!Dhizuku.isPermissionGranted()) {
             Dhizuku.requestPermission(new DhizukuRequestPermissionListener() {
@@ -209,6 +215,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             return false;
         }
     }
+
 
     @Override
     public void onClick(View view) {
