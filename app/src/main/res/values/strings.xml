@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dhizuku_init_failed">请安装或启动 Dhizuku 应用程序，然后重新启动本APP。</string>
+    <string name="dhizuku_permission_denied">请同意 Dhizuku 的权限请求。</string>
+    <string name="block_uninstall_app">Block Uninstall App</string>
+    <string name="unblock_uninstall_app">Unblock Uninstall App</string>
+    <string name="disable_app">Disable App</string>
+    <string name="enable_app">Enable App</string>
+</resources>

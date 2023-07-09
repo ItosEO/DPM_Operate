@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:orientation="vertical">
+
+    <LinearLayout
+         android:layout_height="50dp"
+         android:layout_width="match_parent"
+         android:background="#F4A7B9">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:text="DeviceOwner Operate - by Itos初号机"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+            <Button
+                android:id="@+id/block_uninstall"
+                style="@android:style/Widget.Material.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="开启卸载限制"
+                android:textSize="18sp" />
+
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="18sp"
+                style="@android:style/Widget.Material.Button.Borderless.Colored"
+                android:id="@+id/unblock_uninstall"
+                android:text="解除卸载限制" />
+    </LinearLayout>
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        style="@android:style/Widget.Material.Button.Borderless.Colored"
+        android:id="@+id/check_unblock_uninstall"
+        android:text="查询卸载限制" />
+    <EditText
+        android:id="@+id/pkg_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入要操作的软件包名"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:text="com.itos.dpm"
+        android:maxLines="1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注意: 此软件不能解除系统APP的卸载限制"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="18sp"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:id="@+id/change_screen_text"
+            android:text="更改锁屏提示文字" />
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="18sp"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:id="@+id/set_org_name"
+            android:text="更改组织名" />
+    </LinearLayout>
+    <EditText
+        android:id="@+id/screen_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入你想在锁屏自定义的提示文字/组织名"
+        android:maxLength="16"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:maxLines="1" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/screen_capture_enabled"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="启用截屏"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/screen_capture_disabled"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="禁用截屏"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/camera_enabled"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="启用相机"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/camera_disabled"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="禁用相机"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/uninstall_enabled"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="启用卸载"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/uninstall_disabled"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="禁用卸载"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/install_enabled"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="启用安装"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/install_disabled"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="禁用安装"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <Button
+        android:id="@+id/join"
+        style="@android:style/Widget.Material.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="加入QQ群"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="19sp" />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+</LinearLayout>
