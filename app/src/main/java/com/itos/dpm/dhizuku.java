@@ -47,10 +47,10 @@ public class dhizuku {
             Uri uri = Uri.parse("mqqapi://card/show_pslcard?src_type=internal&version=1&uin=262040855&card_type=group&source=qrcode");
             try {
                 activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                activity.finish();
             } catch (ActivityNotFoundException e) {
                 Toast.makeText(activity, "未安装QQ或版本不支持", Toast.LENGTH_SHORT).show();
             }
-            activity.finish();
         });
         builder.setCancelable(false);
         dialog = builder.create();
