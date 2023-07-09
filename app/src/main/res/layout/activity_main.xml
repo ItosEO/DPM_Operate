@@ -120,7 +120,7 @@
                 android:id="@+id/global_proxy_address_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入全局代理 主机:端口(别乱填,没写异常处理)"
+                android:hint="请输入全局代理 (别乱填,没写异常处理)"
                 android:maxLength="16"
                 android:importantForAutofill="no"
                 android:inputType="none"
