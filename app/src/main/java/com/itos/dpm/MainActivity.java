@@ -36,6 +36,7 @@ import java.util.Arrays;
 public class MainActivity extends Activity implements View.OnClickListener {
     DevicePolicyManager mDevicePolicyManager;
     private IUserService service;
+
     ComponentName componentName;
     private static final String[] REQUIRED_DELEGATED_SCOPES = new String[]{
             DevicePolicyManager.DELEGATION_BLOCK_UNINSTALL,

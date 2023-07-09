@@ -1,6 +1,7 @@
 package com.itos.dpm;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.net.ProxyInfo;
 import android.os.RemoteException;
 
 //import androidx.annotation.Keep;
@@ -50,6 +51,11 @@ public class UserService extends IUserService.Stub{
     @Override
     public void clear_user_restriction(String key) {
         devicePolicyManager.clearUserRestriction(DhizukuVariables.COMPONENT_NAME, key);
+    }
+
+    @Override
+    public void set_global_proxy(ProxyInfo proxyinfo) throws RemoteException {
+        devicePolicyManager.setRecommendedGlobalProxy(DhizukuVariables.COMPONENT_NAME, proxyinfo);
     }
 
 }
