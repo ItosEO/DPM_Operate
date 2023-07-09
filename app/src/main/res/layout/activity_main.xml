@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:text="DeviceOwner Operate - by Itos初号机"
+            android:text="DeviceOwner Operate - By Itos初号机"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
