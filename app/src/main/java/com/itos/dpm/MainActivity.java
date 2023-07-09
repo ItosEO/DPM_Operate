@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.ProxyInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -43,7 +44,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             DevicePolicyManager.DELEGATION_PACKAGE_ACCESS,
     };
 
-    EditText pkg_editText, screen_editText;
+    EditText pkg_editText, screen_editText, proxyinfo_edit;
+    ProxyInfo proxyInfo;
 
     String[] options = {"安装APP", "卸载APP", "ADB调试"};
     Spinner spinner;
@@ -100,6 +102,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         pkg_editText = findViewById(R.id.pkg_edit_text);
         screen_editText = findViewById(R.id.screen_edit_text);
+        proxyinfo_edit = findViewById(R.id.global_proxy_address_edit);
         findViewById(R.id.unblock_uninstall).setOnClickListener(this);
         findViewById(R.id.block_uninstall).setOnClickListener(this);
         findViewById(R.id.check_unblock_uninstall).setOnClickListener(this);
@@ -111,6 +114,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.user_restriction_disabled).setOnClickListener(this);
         findViewById(R.id.user_restriction_enabled).setOnClickListener(this);
         findViewById(R.id.set_org_name).setOnClickListener(this);
+        findViewById(R.id.set_global_proxy_address).setOnClickListener(this);
         findViewById(R.id.join).setOnClickListener(this);
 
         spinner = findViewById(R.id.spinner);
@@ -131,7 +135,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 } else {
                     UserRestriction=UserManager.DISALLOW_DEBUGGING_FEATURES;
                 }
-                Toast.makeText(MainActivity.this, "选择了：" + selectedItem, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MainActivity.this, "选择了：" + selectedItem, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
@@ -205,11 +209,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
             return false;
         }
     }
+
     @Override
     public void onClick(View view) {
         int id = view.getId();
         String packageName = pkg_editText.getText().toString();
         String screen_text = screen_editText.getText().toString();
+        String proxyinfo_text = proxyinfo_edit.getText().toString();
         if (id == R.id.block_uninstall) {
             if (!pkg2name(packageName).equals("")) {
                 mDevicePolicyManager.setUninstallBlocked(componentName, packageName, true);
@@ -284,6 +290,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
             } catch (RemoteException e) {
                 ShowToastS(this, "启用"+selectedItem+"失败");
             }
+        } else if (id == R.id.set_global_proxy_address){
+            try {
+//                // 使用冒号分隔字符串
+//                String[] parts = proxyinfo_text.split(":");
+//                // 获取主机和端口
+//                String host = parts[0];
+//                String portString = parts[1];
+//                // 将端口字符串转换为 int 类型
+//                int port = Integer.parseInt(portString);
+//
+//                proxyInfo = ProxyInfo.buildDirectProxy(host, port);
+                service.set_global_proxy(proxyinfo_text);
+                ShowToastS(this, "已尝试将全局代理设置为" + proxyinfo_text);
+            } catch (RemoteException e) {
+                ShowToastS(this, "设置失败");
+            }
+
         } else if (id == R.id.set_org_name){
             try {
                 service.set_org_name(screen_text);
