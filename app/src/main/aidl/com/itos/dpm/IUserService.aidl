@@ -9,6 +9,6 @@ interface IUserService {
     void set_org_name(String text) = 24;
     void add_user_restriction(String key) = 25;
     void clear_user_restriction(String key) = 26;
-    void set_global_proxy(in ProxyInfo proxyinfo) = 27;
+    void set_global_proxy(String url) = 27;
     // 20以内的transact code是保留给未来的Dhizuku APi使用的。
 }
