@@ -20,4 +20,4 @@
 
 求一波关注(doge)
 
-软件下载地址: [点我](https://itos.codegang.top/share/)
+软件下载: [点我](https://itos.codegang.top/share/)
