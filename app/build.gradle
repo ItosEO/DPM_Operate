@@ -8,7 +8,7 @@ android {
         applicationId "com.itos.dpm"
         minSdk 28
         targetSdk 33
-        versionCode 13
+        versionCode 14
         versionName "Release-5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
