@@ -35,6 +35,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
+
 import com.itos.dpm.dhizuku;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -291,6 +293,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             try {
                 service.add_user_restriction(UserRestriction);
                 ShowToastS(this, "已尝试禁用"+selectedItem);
+                if (Objects.equals(selectedItem, "安装APP")) {
+                    ShowToastL(this,"开启此限制后千万不要取消激活Dhizuku并卸载, 不然你就只能双清了");
+                }
             } catch (RemoteException e) {
                 ShowToastS(this, "禁用"+selectedItem+"失败");
             }
